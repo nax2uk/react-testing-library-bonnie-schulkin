@@ -10,7 +10,6 @@ describe('<App/>', () => {
 
   describe('<input type="checkbox"/>', () => {
     test('starts of unchecked', () => {
-
       expect(checkbox).not.toBeChecked();
     });
   });
@@ -18,18 +17,18 @@ describe('<App/>', () => {
   describe('<button/>', () => {
     let colorButton: HTMLElement;
     beforeEach(() => {
-      colorButton = screen.getByRole('button', { name: 'Change to blue' });
+      colorButton = screen.getByRole('button', { name: 'Change to Midnight Blue' });
     });
 
     test('starts of with red background', () => {
-      expect(colorButton).toHaveStyle({ backgroundColor: 'red' });
+      expect(colorButton).toHaveStyle({ backgroundColor: 'MediumVioletRed' });
     });
 
     test('turns blue when clicked', () => {
       fireEvent.click(colorButton);
 
-      expect(colorButton.textContent).toBe('Change to red');
-      expect(colorButton).toHaveStyle({ backgroundColor: 'blue' });
+      expect(colorButton.textContent).toBe('Change to Medium Violet Red');
+      expect(colorButton).toHaveStyle({ backgroundColor: 'MidnightBlue' });
     });
 
     test('starts out as enabled', () => {
@@ -45,22 +44,21 @@ describe('<App/>', () => {
     });
 
     test('has grey background when checkbox is checked and reverts to red background when checkbox is unchecked', () => {
+      fireEvent.click(checkbox);
+      expect(colorButton).toHaveStyle({ backgroundColor: 'gray' });
 
       fireEvent.click(checkbox);
-      expect(colorButton).toHaveStyle({backgroundColor: 'gray'});
-
-      fireEvent.click(checkbox);
-      expect(colorButton).toHaveStyle({backgroundColor: 'red'});
+      expect(colorButton).toHaveStyle({ backgroundColor: 'MediumVioletRed' });
     });
 
     test('has grey background when checkbox is checked and reverts to blue background when checkbox is unchecked', () => {
       fireEvent.click(colorButton);
       fireEvent.click(checkbox);
-      expect(colorButton).toHaveStyle({backgroundColor: 'gray'});
-      
+      expect(colorButton).toHaveStyle({ backgroundColor: 'gray' });
+
       fireEvent.click(checkbox);
-      expect(colorButton).toBeEnabled()
-      expect(colorButton).toHaveStyle({ backgroundColor: 'blue'});
-    })
+      expect(colorButton).toBeEnabled();
+      expect(colorButton).toHaveStyle({ backgroundColor: 'MidnightBlue' });
+    });
   });
 });
