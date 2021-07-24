@@ -14,18 +14,27 @@ describe('<App/>', () => {
     test('has correct initial color and text', () => {
       expect(colorButton).toHaveStyle({ backgroundColor: 'red' });
     });
-  
-    test('starts out as enablesd', () => {
-      expect(colorButton).toBeEnabled();
-    });
 
     test('turns blue when clicked', () => {
       fireEvent.click(colorButton);
    
-      waitFor(()=> {
-        expect(colorButton.textContent).toBe('Change to red');
-        expect(colorButton).toHaveStyle({ backgroundColor: 'blue' });
-      })
+      expect(colorButton.textContent).toBe('Change to red');
+      expect(colorButton).toHaveStyle({ backgroundColor: 'blue' });
+
+    });
+
+    test('starts out as enabled', () => {
+      expect(colorButton).toBeEnabled();
+    });
+
+    test('is disabled when checkbox is checked and enabled when checkbox is unchecked', () => {
+      const checkbox = screen.getByRole('checkbox');
+
+      fireEvent.click(checkbox);
+      expect(colorButton).toBeDisabled();
+
+      fireEvent.click(checkbox);
+      expect(colorButton).toBeEnabled();
     });
   })
 
@@ -33,6 +42,6 @@ describe('<App/>', () => {
     test('starts of unchecked', () => {
       const checkbox = screen.getByRole('checkbox');
       expect(checkbox).not.toBeChecked();
-    })
+    });
   })
 });
