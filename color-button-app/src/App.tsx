@@ -9,9 +9,11 @@ const App: React.FC = () => {
     <div>
       <button 
       style={{ backgroundColor: buttonColour }}
-      onClick={() => setButtonColour(newButtonColour)}>
+      onClick={() => setButtonColour(newButtonColour)}
+      >
         Change to {newButtonColour}
       </button>
+      <input type='checkbox' />
     </div>
   );
 };
