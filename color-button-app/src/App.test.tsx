@@ -1,17 +1,27 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 
 describe('<App/>', () => {
+  let checkbox: HTMLElement;
   beforeEach(() => {
     render(<App />);
+    checkbox = screen.getByRole('checkbox', { name: 'Disable button' });
   });
+
+  describe('<input type="checkbox"/>', () => {
+    test('starts of unchecked', () => {
+
+      expect(checkbox).not.toBeChecked();
+    });
+  });
+
   describe('<button/>', () => {
     let colorButton: HTMLElement;
     beforeEach(() => {
       colorButton = screen.getByRole('button', { name: 'Change to blue' });
     });
 
-    test('has correct initial color and text', () => {
+    test('starts of with red background', () => {
       expect(colorButton).toHaveStyle({ backgroundColor: 'red' });
     });
 
@@ -27,20 +37,30 @@ describe('<App/>', () => {
     });
 
     test('is disabled when checkbox is checked and enabled when checkbox is unchecked', () => {
-      const checkbox = screen.getByRole('checkbox', { name: 'Disable button' });
-
       fireEvent.click(checkbox);
       expect(colorButton).toBeDisabled();
 
       fireEvent.click(checkbox);
       expect(colorButton).toBeEnabled();
     });
-  });
 
-  describe('<input type="checkbox"/>', () => {
-    test('starts of unchecked', () => {
-      const checkbox = screen.getByRole('checkbox', { name: 'Disable button' });
-      expect(checkbox).not.toBeChecked();
+    test('has grey background when checkbox is checked and reverts to red background when checkbox is unchecked', () => {
+
+      fireEvent.click(checkbox);
+      expect(colorButton).toHaveStyle({backgroundColor: 'gray'});
+
+      fireEvent.click(checkbox);
+      expect(colorButton).toHaveStyle({backgroundColor: 'red'});
     });
+
+    test('has grey background when checkbox is checked and reverts to blue background when checkbox is unchecked', () => {
+      fireEvent.click(colorButton);
+      fireEvent.click(checkbox);
+      expect(colorButton).toHaveStyle({backgroundColor: 'gray'});
+      
+      fireEvent.click(checkbox);
+      expect(colorButton).toBeEnabled()
+      expect(colorButton).toHaveStyle({ backgroundColor: 'blue'});
+    })
   });
 });
