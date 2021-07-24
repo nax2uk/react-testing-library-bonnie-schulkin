@@ -17,11 +17,12 @@ const App: React.FC = () => {
       </button>
       <input
         type='checkbox'
-        id='checkbox-enable-button'
+        id='checkbox-disable-button'
         defaultChecked={buttonDisabled}
         aria-checked={buttonDisabled}
         onChange={(e) => setButtonDisabled(e.target.checked)}
       />
+      <label htmlFor="checkbox-disable-button">Disable button</label>
     </div>
   );
 };
