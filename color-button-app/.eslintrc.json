@@ -1,15 +1,16 @@
 {
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "testing-library", "jest-dom"],
-  "rules": {
-    "semi": ["error", "always"],
-    "quotes": [2, "single"]
-  },
   "extends": [
     "react-app",
     "react-app/jest",
     "plugin:testing-library/recommended",
     "plugin:testing-library/react",
-    "plugin:jest-dom/recommended"
-  ]
+    "plugin:jest-dom/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "semi": ["error", "always"],
+    "quotes": [2, "single"]
+  }
 }
