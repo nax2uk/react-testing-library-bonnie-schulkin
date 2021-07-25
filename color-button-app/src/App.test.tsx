@@ -17,7 +17,9 @@ describe('<App/>', () => {
   describe('<button/>', () => {
     let colorButton: HTMLElement;
     beforeEach(() => {
-      colorButton = screen.getByRole('button', { name: 'Change to Midnight Blue' });
+      colorButton = screen.getByRole('button', {
+        name: 'Change to Midnight Blue',
+      });
     });
 
     test('starts of with red background', () => {
@@ -27,7 +29,7 @@ describe('<App/>', () => {
     test('turns blue when clicked', () => {
       fireEvent.click(colorButton);
 
-      expect(colorButton.textContent).toBe('Change to Medium Violet Red');
+      expect(colorButton).toHaveTextContent('Change to Medium Violet Red');
       expect(colorButton).toHaveStyle({ backgroundColor: 'MidnightBlue' });
     });
 

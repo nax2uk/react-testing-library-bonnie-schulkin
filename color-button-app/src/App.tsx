@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { replaceCamelWithSpaces } from './utils/replaceCamelWithSpaces';
+import {replaceCamelWithSpaces} from './utils/replaceCamelWithSpaces';
 import './App.css';
 
 const App: React.FC = () => {
   const [buttonColor, setButtonColor] = useState('MediumVioletRed');
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const newButtonColor = buttonColor === 'MediumVioletRed' ? 'MidnightBlue' : 'MediumVioletRed';
+  const newButtonColor =
+    buttonColor === 'MediumVioletRed' ? 'MidnightBlue' : 'MediumVioletRed';
 
   return (
     <div>
@@ -23,7 +24,7 @@ const App: React.FC = () => {
         aria-checked={buttonDisabled}
         onChange={(e) => setButtonDisabled(e.target.checked)}
       />
-      <label htmlFor="checkbox-disable-button">Disable button</label>
+      <label htmlFor='checkbox-disable-button'>Disable button</label>
     </div>
   );
 };
